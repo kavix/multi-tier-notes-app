@@ -1,11 +1,13 @@
 import json
 import logging
+import os
 from contextlib import asynccontextmanager
 from typing import Optional
 
 import redis
 from fastapi import FastAPI, Depends, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from sqlalchemy.orm import Session
 from sqlalchemy import text
 
@@ -180,3 +182,9 @@ def create_note(payload: NoteCreate, db: Session = Depends(get_db)):
         logger.warning(f"Failed to invalidate Redis notes cache: {e}")
 
     return new_note
+
+# Mount static files at root to serve static frontend (index.html, style.css, app.js)
+static_dir = os.path.join(os.path.dirname(__file__), "static")
+if os.path.isdir(static_dir):
+    app.mount("/", StaticFiles(directory=static_dir, html=True), name="static")
+
