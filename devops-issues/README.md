@@ -1,6 +1,6 @@
-# 🚀 DevOps & CI/CD Learning Roadmap (Beginner Track)
+# 🚀 DevOps & DevSecOps Learning Roadmap (Beginner Track)
 
-Welcome! This folder contains **14 beginner-friendly, step-by-step engineering issues** designed to teach you how to manually write **Dockerfiles**, **Docker Compose**, **Kubernetes Manifests**, and **CI/CD Pipelines** from scratch for this 5-tier architecture.
+Welcome! This folder contains **20 beginner-friendly, step-by-step engineering issues** designed to teach you how to manually build a production-ready **Docker**, **Docker Compose**, **Kubernetes**, **CI/CD**, and **DevSecOps** security architecture from scratch.
 
 ---
 
@@ -35,6 +35,18 @@ Welcome! This folder contains **14 beginner-friendly, step-by-step engineering i
 | [Issue #12](./12-ci-pipeline-lint-test.md) | **CI: Lint & Automated Tests** | Parallel jobs for Python pytest, Go unit tests, and React TypeScript build. |
 | [Issue #13](./13-ci-pipeline-docker-build-push.md) | **CI: Build & Push Images to GHCR** | Docker Buildx, GitHub Container Registry (`ghcr.io`), SHA & latest tagging. |
 | [Issue #14](./14-cd-pipeline-k8s-deploy.md) | **CD: K8s Linting & Deployment** | Schema validation with `kubeconform` and automated rollout deployment. |
+
+---
+
+### Phase 4: DevSecOps (Automated Security Gates)
+| Issue | Title | Description |
+|---|---|---|
+| [Issue #15](./15-devsecops-secret-scanning-gitleaks.md) | **Secret Scanning (Gitleaks)** | Scan git commits to block hardcoded database credentials, API keys, and tokens. |
+| [Issue #16](./16-devsecops-sast-code-scanning.md) | **SAST Static Code Analysis** | Automated Bandit (Python), Gosec (Go), and Semgrep (React) scans in CI. |
+| [Issue #17](./17-devsecops-sca-dependency-vulnerability-scanning.md) | **SCA Dependency Scanning** | Audit npm packages, pip wheels, and Go modules against CVE databases with Trivy. |
+| [Issue #18](./18-devsecops-container-image-vulnerability-scanning.md) | **Container Vulnerability Scanning** | Scan Docker images with Trivy in CI before pushing to GHCR. |
+| [Issue #19](./19-devsecops-k8s-pod-security-network-policies.md) | **K8s Hardening & NetworkPolicies** | ReadOnlyRootFilesystem, drop Linux capabilities, Zero-Trust pod isolation. |
+| [Issue #20](./20-devsecops-dast-api-scanning-owasp-zap.md) | **DAST Dynamic API Security** | Automated OWASP ZAP attacks on OpenAPI endpoints to catch runtime flaws. |
 
 ---
 

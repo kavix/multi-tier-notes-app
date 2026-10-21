@@ -175,11 +175,12 @@ npm run build
 
 ---
 
-## 🛠️ DevOps & Kubernetes Learning Track
+## 🛠️ DevOps, Kubernetes & DevSecOps Learning Track
 
-As requested, all Dockerfiles, Docker Compose, Kubernetes manifests, and CI/CD pipelines have been structured as **hands-on, step-by-step beginner engineering issues** for you to write manually!
+As requested, all Dockerfiles, Docker Compose, Kubernetes manifests, CI/CD pipelines, and DevSecOps security scanners have been structured as **hands-on, step-by-step beginner engineering issues** for you to write manually!
 
-👉 **[Browse the 14 DevOps & Pipeline Issues](./devops-issues/README.md)**:
+👉 **[Browse the 20 DevOps & DevSecOps Issues](./devops-issues/README.md)**:
 - **Phase 1: Containerization (Docker)**: Backend, Go Worker, and React Dockerfiles + Docker Compose.
 - **Phase 2: Kubernetes (K8s)**: Namespace, ConfigMaps, Secrets, Postgres StatefulSet/PVC, Redis, Backend, Worker, Frontend, and Ingress.
 - **Phase 3: CI/CD Pipelines**: GitHub Actions for Automated Testing, Docker Image Build/Push to GHCR, and Kubernetes Validation & Deployment.
+- **Phase 4: DevSecOps (Automated Security)**: Secret Scanning (Gitleaks), SAST (Bandit/Gosec/Semgrep), SCA Dependency Auditing (Trivy), Container Image CVE Scanning, K8s Pod Hardening & Zero-Trust NetworkPolicies, and DAST (OWASP ZAP).
