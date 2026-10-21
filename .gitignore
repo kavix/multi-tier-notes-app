@@ -137,6 +137,7 @@ dist
 !.yarn/sdks
 !.yarn/versions
 
+backend/.venv/
 frontend/node_modules/
 
 # Vite files
