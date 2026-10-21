@@ -150,3 +150,22 @@ vite.config.ts.timestamp-*
 
 # Turbo Repo
 .turbo
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.venv/
+backend/.venv/
+
+# Go
+worker/worker
+*.exe
+
+# Frontend builds
+frontend/dist/
+dist/
+
+# OS
+.DS_Store

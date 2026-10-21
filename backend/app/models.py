@@ -1,3 +1,4 @@
+from __future__ import annotations
 """SQLAlchemy ORM models for the notes application."""
 
 from sqlalchemy import Column, DateTime, Integer, String, Text, func

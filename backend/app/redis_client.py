@@ -1,3 +1,4 @@
+from __future__ import annotations
 """Redis client singleton and helper utilities.
 
 Provides a shared Redis connection used across the application for

@@ -1,3 +1,4 @@
+from __future__ import annotations
 """SQLAlchemy database engine and session management.
 
 Provides a session factory and a FastAPI dependency for injecting

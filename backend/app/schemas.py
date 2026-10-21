@@ -4,9 +4,12 @@ Separates input (create/update) schemas from the output schema
 to control which fields are exposed in API responses.
 """
 
-from datetime import datetime
+from __future__ import annotations
 
-from pydantic import BaseModel, ConfigDict, Field
+from datetime import datetime
+from typing import Any, List, Optional, Union
+
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 
 # ---------------------------------------------------------------------------
@@ -19,7 +22,18 @@ class NoteCreate(BaseModel):
 
     title: str = Field(..., min_length=1, max_length=255, description="Note title")
     content: str = Field(..., min_length=1, description="Note body text")
-    tags: str | None = Field(default="", max_length=500, description="Comma-separated tags")
+    tags: Optional[Union[List[str], str]] = Field(default_factory=list, description="Tags list or comma-separated tags")
+
+    @field_validator("tags", mode="before")
+    @classmethod
+    def normalize_tags(cls, v: Any) -> list[str]:
+        if v is None:
+            return []
+        if isinstance(v, str):
+            return [t.strip() for t in v.split(",") if t.strip()]
+        if isinstance(v, list):
+            return [str(t).strip() for t in v if str(t).strip()]
+        return []
 
 
 class NoteUpdate(BaseModel):
@@ -28,9 +42,20 @@ class NoteUpdate(BaseModel):
     All fields are optional — only supplied fields will be updated.
     """
 
-    title: str | None = Field(default=None, min_length=1, max_length=255)
-    content: str | None = Field(default=None, min_length=1)
-    tags: str | None = Field(default=None, max_length=500)
+    title: Optional[str] = Field(default=None, min_length=1, max_length=255)
+    content: Optional[str] = Field(default=None, min_length=1)
+    tags: Optional[Union[List[str], str]] = Field(default=None)
+
+    @field_validator("tags", mode="before")
+    @classmethod
+    def normalize_tags(cls, v: Any) -> Optional[list[str]]:
+        if v is None:
+            return None
+        if isinstance(v, str):
+            return [t.strip() for t in v.split(",") if t.strip()]
+        if isinstance(v, list):
+            return [str(t).strip() for t in v if str(t).strip()]
+        return None
 
 
 # ---------------------------------------------------------------------------
@@ -44,12 +69,23 @@ class NoteOut(BaseModel):
     id: int
     title: str
     content: str
-    tags: str | None
-    word_count: int | None
-    summary: str | None
-    status: str
+    tags: List[str] = Field(default_factory=list)
+    word_count: Optional[int] = None
+    summary: Optional[str] = None
+    status: str = "pending"
     created_at: datetime
     updated_at: datetime
+
+    @field_validator("tags", mode="before")
+    @classmethod
+    def parse_tags_for_out(cls, v: Any) -> list[str]:
+        if v is None:
+            return []
+        if isinstance(v, str):
+            return [t.strip() for t in v.split(",") if t.strip()]
+        if isinstance(v, list):
+            return [str(t).strip() for t in v if str(t).strip()]
+        return []
 
     model_config = ConfigDict(from_attributes=True)
 
@@ -57,10 +93,10 @@ class NoteOut(BaseModel):
 class NoteListResponse(BaseModel):
     """Response wrapper for the list-notes endpoint."""
 
-    notes: list[NoteOut]
+    notes: List[NoteOut]
     cached: bool
     source: str
-    ttl_remaining: int | None
+    ttl_remaining: Optional[int] = None
     count: int
 
 
@@ -86,4 +122,4 @@ class WorkerStatusResponse(BaseModel):
     queue_length: int
     processed_count: int
     worker_status: str
-    last_heartbeat: str | None
+    last_heartbeat: Optional[str] = None
